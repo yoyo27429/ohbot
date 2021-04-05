@@ -1,30 +1,45 @@
+<script>
+import Header from "@/components/Header.vue";
+import Footer from "@/components/Footer.vue";
+import { onMounted } from "@vue/runtime-core";
+import { useStore } from 'vuex';
+export default {
+  setup() {
+    const store = useStore();
+    const initCurrentDate = () => {
+      store.dispatch("handleInitDate");
+    };
+    onMounted(() => {
+      initCurrentDate();
+    });
+    return {};
+  },
+  components: {
+    Header,
+    Footer,
+  },
+};
+</script>
+
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+  <Header />
+  <div class="viewBox">
+    <router-view />
   </div>
-  <router-view/>
+  <Footer />
 </template>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+* {
+  padding: 0px;
+  margin: 0px;
 }
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+.viewBox {
+  margin-top: 130px;
+  margin-bottom: 60px;
+  overflow: auto;
+  @media screen and(min-width:1200px) {
+    margin-top: 150px;
   }
 }
 </style>
